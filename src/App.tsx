@@ -6,6 +6,7 @@ import { UserCard } from 'components/UserCard';
 import { defaultUser } from 'mock';
 import { useState } from 'react';
 import { GithubError, GithubUser, LocalGithubUser } from 'types';
+import { extractLocalUser } from 'utils/extract-local-user';
 import { isGithubUser } from 'utils/typeguards';
 
 const BASE_URL = 'https://api.github.com/users/';
@@ -19,7 +20,7 @@ function App() {
 		const user = (await response.json()) as GithubUser | GithubError;
 
 		if (isGithubUser(user)) {
-			setUser(user);
+			setUser(extractLocalUser(user));
 		} else {
 			setUser(null);
 		}
@@ -29,7 +30,7 @@ function App() {
 		<Container>
 			<TheHeader />
 			<Search hasError={!user} onSubmit={fetchUser} />
-			{user && <UserCard {...defaultUser} />}
+			{user && <UserCard {...user} />}
 		</Container>
 	);
 }
