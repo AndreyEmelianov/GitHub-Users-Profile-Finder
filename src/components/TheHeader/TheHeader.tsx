@@ -3,7 +3,7 @@ import styles from './TheHeader.module.scss';
 
 export const TheHeader = () => (
 	<div className={styles.header}>
-		<div className={styles.logo}>devfinder</div>
+		<div className={styles.logo}>GitHub users finder</div>
 		<ThemeSwitcher />
 	</div>
 );
